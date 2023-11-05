@@ -21,3 +21,14 @@ pub struct MetaData {
     website: Option<String>,
     comment: Option<String>,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn example_project_xml() {
+        quick_xml::de::from_str::<Project>(&std::fs::read_to_string("./project.xml").unwrap())
+            .unwrap();
+    }
+}

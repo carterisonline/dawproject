@@ -40,7 +40,7 @@ pub mod project {
     #[derive(Default, PartialEq, Debug, Serialize, Deserialize)]
     #[serde(rename_all = "PascalCase")]
     pub struct ScenesType {
-        pub scene: Vec<Scene>,
+        pub scene: Option<Vec<Scene>>,
     }
 }
 
@@ -1048,8 +1048,6 @@ pub struct Markers {
 #[derive(Default, PartialEq, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct Warps {
-    pub warp: Vec<Warp>,
-
     #[serde(rename = "@contentTimeUnit")]
     pub content_time_unit: TimeUnit,
 
@@ -1088,6 +1086,7 @@ pub mod warps {
         #[serde(rename = "markers")]
         Markers(Markers),
         Warps(Box<Warps>),
+        Warp(Warp),
         Audio(Audio),
         Video(Video),
         Points(Points),
@@ -1111,6 +1110,7 @@ pub struct Warp {
 }
 
 #[derive(Default, PartialEq, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub struct Audio {
     pub file: FileReference,
 
@@ -1491,7 +1491,7 @@ impl Default for ExpressionType {
 #[derive(PartialEq, Debug, Serialize, Deserialize, Default)]
 pub struct ParametersType {
     #[serde(rename = "$value")]
-    pub parameters_choice: Vec<ParametersChoice>,
+    pub parameters_choice: Option<Vec<ParametersChoice>>,
 }
 
 #[derive(PartialEq, Debug, Serialize, Deserialize)]
